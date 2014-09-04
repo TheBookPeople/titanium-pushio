@@ -1,0 +1,10 @@
+{
+    "pushio":{
+        "appName":"tbp-mobile-deals",
+        "platformName":"iOS Development",
+        "platform_type":"sapns",
+        "bundleId":"com.bookpeople.tbpmobile",
+        "apiKey":"M3NqdVwxyA_sHwI",
+        "apiHost":"api.push.io"
+    }
+}
