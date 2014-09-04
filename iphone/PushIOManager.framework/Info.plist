@@ -1,0 +1,14 @@
+CFBundleDevelopmentRegion
+English
+CFBundleExecutable
+PushIOManager
+CFBundleIdentifier
+com.pushio.pushiomanager
+CFBundleInfoDictionaryVersion
+6.0
+CFBundlePackageType
+FMWK
+CFBundleSignature
+????
+CFBundleVersion
+2.10.5
