@@ -29,7 +29,6 @@
 		AA747D9F0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		BE03349F19B86F840032B7EB /* PushIOManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE03349E19B86F840032B7EB /* PushIOManager.framework */; };
-		BE0334A119B86F910032B7EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0334A019B86F910032B7EB /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 		AA747D9E0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkCoTbpPushio_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE03349E19B86F840032B7EB /* PushIOManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushIOManager.framework; sourceTree = "<group>"; };
-		BE0334A019B86F910032B7EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
 		BE0334A219B86FA10032B7EB /* pushio_config_debug.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pushio_config_debug.json; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libUkCoTbpPushio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUkCoTbpPushio.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -61,7 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE0334A119B86F910032B7EB /* CoreLocation.framework in Frameworks */,
 				BE03349F19B86F840032B7EB /* PushIOManager.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
@@ -92,7 +89,6 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE0334A019B86F910032B7EB /* CoreLocation.framework */,
 				BE03349E19B86F840032B7EB /* PushIOManager.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 			);
