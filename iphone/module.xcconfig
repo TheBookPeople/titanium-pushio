@@ -26,4 +26,5 @@
 // IMPORTANT NOTE: always use $(inherited) in your overrides
 //
 
-OTHER_LDFLAGS=$(inherited) -F"/Users/will/Development/projects/pushio-module/push-io/iphone/"  -framework PushIOManager
+OTHER_LDFLAGS=$(inherited) -F"/Users/will/Development/projects/pushio-module/titanium-push-io/iphone"  -framework PushIOManager
+
