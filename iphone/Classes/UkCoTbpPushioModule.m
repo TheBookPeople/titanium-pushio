@@ -95,16 +95,20 @@
 			}
 		}
 	}
-	
-	[[TiApp app] setRemoteNotificationDelegate:self];
-	[app registerForRemoteNotificationTypes:ourNotifications];
     
     [[PushIOManager sharedInstance] setDelegate:self];
-    [[PushIOManager sharedInstance] didFinishLaunchingWithOptions:nil];
-	
+    [[PushIOManager sharedInstance] didFinishLaunchingWithOptions:[[TiApp app] launchOptions]];
+    [[PushIOManager sharedInstance] setDebugLevel:PUSHIO_DEBUG_VERBOSE];
+    
+    [[TiApp app] setRemoteNotificationDelegate:self];
+    
+	[app registerForRemoteNotificationTypes:ourNotifications];
+    
+    
 	// check to see upon registration if we were started with a push
 	// notification and if so, go ahead and trigger our callback
 	id currentNotification = [[TiApp app] remoteNotification];
+    
 	if (currentNotification!=nil && pushNotificationCallback!=nil)
 	{
 		NSMutableDictionary * event = [TiUtils dictionaryWithCode:0 message:nil];
@@ -143,8 +147,12 @@
 
 #pragma mark Push Notification Delegates
 
+
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    NSLog(@"[INFO] didRegisterForRemoteNotificationsWithDeviceToken %@ ",deviceToken);
+    [[PushIOManager sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    
 	// called by TiApp
 	if (pushNotificationSuccess!=nil)
 	{
@@ -159,6 +167,9 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
+     NSLog(@"[INFO] didReceiveRemoteNotification");
+    [[PushIOManager sharedInstance] didReceiveRemoteNotification:userInfo];
+    
 	// called by TiApp
 	if (pushNotificationCallback!=nil)
 	{
@@ -172,6 +183,10 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
+    
+     NSLog(@"[INFO] didFailToRegisterForRemoteNotificationsWithError %@ ",error);
+    [[PushIOManager sharedInstance] didFailToRegisterForRemoteNotificationsWithError:error];
+
 	// called by TiApp
 	if (pushNotificationError!=nil)
 	{
@@ -181,6 +196,33 @@
 	}
 }
 
+
+#pragma mark Push IO
+
+- (void) readyForRegistration
+{
+    NSLog(@"Push IO is ready for registration");
+    
+    // This will register for broadcast. Alternatively, register for categories to segment.
+    [[PushIOManager sharedInstance] registerWithPushIO];
+}
+
+- (void)registrationSucceeded
+{
+    NSLog(@"Push IO registration succeeded");
+}
+
+- (void)registrationFailedWithError:(NSError *)error statusCode:(int)statusCode
+{
+    NSLog(@"Push IO registration failed");
+}
+
+- (void)newNewsstandContentAvailable
+{
+    // Start your content download here.
+    NSLog(@"Push IO new newstand content available");
+}
+
 #pragma mark Listener Notifications
 
 
@@ -188,26 +230,34 @@
 // Any categories not present in the array will be degregistered if already registered with the server.
 // An empty array is treated as an Unregister call.
 - (void) registerCategories:(id)categories{
-    ENSURE_TYPE(categories, NSArray);
-    [[PushIOManager sharedInstance] registerCategories:categories];
+    ENSURE_ARG_COUNT(categories, 1);
+    ENSURE_TYPE([categories objectAtIndex:0], NSArray);
+
+    [[PushIOManager sharedInstance] registerCategories:[categories objectAtIndex:0]];
 }
 
 // Registers a single category, leaving any other categories still registered.
 - (void) registerCategory:(id)category{
-    ENSURE_TYPE(category, NSString);
-    [[PushIOManager sharedInstance] registerCategory:category];
+    ENSURE_ARG_COUNT(category, 1);
+    ENSURE_TYPE([category objectAtIndex:0], NSString);
+    
+    [[PushIOManager sharedInstance] registerCategory:[category objectAtIndex:0]];
 }
 
 // Unregisters a single category, leaving all other categories in place.
 - (void) unregisterCategory:(id)category{
-    ENSURE_TYPE(category, NSString);
-    [[PushIOManager sharedInstance] unregisterCategory:category];
+    ENSURE_ARG_COUNT(category, 1);
+    ENSURE_TYPE([category objectAtIndex:0], NSString);
+    
+    [[PushIOManager sharedInstance] unregisterCategory:[category objectAtIndex:0]];
 }
 
 // Unregisters a group of categories, leaving any categories not in the pased in array still registered.
 - (void) unregisterCategories:(id)categories{
-    ENSURE_TYPE(categories, NSArray);
-    [[PushIOManager sharedInstance] unregisterCategories:categories];
+    ENSURE_ARG_COUNT(categories, 1);
+    ENSURE_TYPE([categories objectAtIndex:0], NSString);
+    
+    [[PushIOManager sharedInstance] unregisterCategories:[categories objectAtIndex:0]];
 }
 
 // Unregister all categories for this device from Push IO
@@ -217,8 +267,10 @@
 
 // Returns information on the categories for which this app has requested registration.
 - (id) isRegisteredForCategory:(id)category{
-    ENSURE_TYPE(category, NSString);
-    return NUMBOOL([[PushIOManager sharedInstance] isRegisteredForCategory:category]);
+    ENSURE_ARG_COUNT(category, 1);
+    ENSURE_TYPE([category objectAtIndex:0], NSString);
+    
+    return NUMBOOL([[PushIOManager sharedInstance] isRegisteredForCategory:[category objectAtIndex:0]]);
 }
 
 - (id) allRegisteredCategories{
@@ -228,8 +280,10 @@
 //UserID
 -(void)registerUserID:(id)userID
 {
-    ENSURE_TYPE(userID, NSString);
-    [[PushIOManager sharedInstance] registerUserID:userID];
+    ENSURE_ARG_COUNT(userID, 1);
+    ENSURE_TYPE([userID objectAtIndex:0], NSString);
+
+    [[PushIOManager sharedInstance] registerUserID:[userID objectAtIndex:0]];
 }
 
 - (void) unregisterUserID{
