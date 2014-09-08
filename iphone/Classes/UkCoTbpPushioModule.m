@@ -241,6 +241,8 @@
 
 
 #pragma Public APIs
+
+#pragma Public APIs - Category
 // Any categories not present in the array will be degregistered if already registered with the server.
 // An empty array is treated as an Unregister call.
 - (void) registerCategories:(id)categories{
@@ -291,6 +293,8 @@
     return [[PushIOManager sharedInstance] allRegisteredCategories];
 }
 
+#pragma Public APIs - User Identifier
+
 //UserID
 -(void)registerUserID:(id)userID
 {
@@ -302,6 +306,28 @@
 
 - (void) unregisterUserID{
      [[PushIOManager sharedInstance] unregisterUserID];
+}
+
+- (id) registeredUserID{
+    return [[PushIOManager sharedInstance] registeredUserID];
+}
+
+- (id) isRegisteredForUserID:(id)userID{
+    ENSURE_ARG_COUNT(userID, 1);
+    ENSURE_TYPE([userID objectAtIndex:0], NSString);
+
+    return NUMBOOL([[PushIOManager sharedInstance] isRegisteredForUserID:[userID objectAtIndex:0]]);
+}
+
+
+#pragma Public APIs - Engagement Metric Tracking
+
+
+- (void) trackEngagementCustomMetric:(NSString *)customMetric{
+    ENSURE_ARG_COUNT(customMetric, 1);
+    ENSURE_TYPE([customMetric objectAtIndex:0], NSString);
+    
+    [[PushIOManager sharedInstance] trackEngagementCustomMetric:[customMetric objectAtIndex:0]];
 }
 
 
