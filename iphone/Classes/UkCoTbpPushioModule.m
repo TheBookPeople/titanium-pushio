@@ -1,8 +1,22 @@
 /**
- * push-io
+ * Titatanium PushIO Module
  *
- * Created by Your Name
+ * Created by The Book People Ltd
  * Copyright (c) 2014 Your Company. All rights reserved.
+ *
+ * This file is part of Titatanium PushIO Module.
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ 
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ 
+ * You should have received a copy of the GNU General Public License
+ * along with Titatanium PushIO Module.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #import "UkCoTbpPushioModule.h"
@@ -227,6 +241,8 @@
 
 
 #pragma Public APIs
+
+#pragma Public APIs - Category
 // Any categories not present in the array will be degregistered if already registered with the server.
 // An empty array is treated as an Unregister call.
 - (void) registerCategories:(id)categories{
@@ -277,6 +293,8 @@
     return [[PushIOManager sharedInstance] allRegisteredCategories];
 }
 
+#pragma Public APIs - User Identifier
+
 //UserID
 -(void)registerUserID:(id)userID
 {
@@ -288,6 +306,28 @@
 
 - (void) unregisterUserID{
      [[PushIOManager sharedInstance] unregisterUserID];
+}
+
+- (id) registeredUserID{
+    return [[PushIOManager sharedInstance] registeredUserID];
+}
+
+- (id) isRegisteredForUserID:(id)userID{
+    ENSURE_ARG_COUNT(userID, 1);
+    ENSURE_TYPE([userID objectAtIndex:0], NSString);
+
+    return NUMBOOL([[PushIOManager sharedInstance] isRegisteredForUserID:[userID objectAtIndex:0]]);
+}
+
+
+#pragma Public APIs - Engagement Metric Tracking
+
+
+- (void) trackEngagementCustomMetric:(NSString *)customMetric{
+    ENSURE_ARG_COUNT(customMetric, 1);
+    ENSURE_TYPE([customMetric objectAtIndex:0], NSString);
+    
+    [[PushIOManager sharedInstance] trackEngagementCustomMetric:[customMetric objectAtIndex:0]];
 }
 
 

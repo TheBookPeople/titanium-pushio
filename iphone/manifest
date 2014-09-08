@@ -5,8 +5,8 @@
 version: 1.0.0
 apiversion: 2
 description: push-io
-author: Your Name
-license: Specify your license
+author: The Book People Ltd
+license: GPLv3
 copyright: Copyright (c) 2014 by The Book People Ltd
 
 # these should not be edited

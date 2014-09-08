@@ -18,4 +18,5 @@ DerivedData
 *.xcuserstate
 *.zip
 
-
+#ignore pushio configuration
+assets/pushio_config_debug.json
