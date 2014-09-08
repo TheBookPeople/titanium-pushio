@@ -27,7 +27,8 @@ PushIO have created a iOS framework for their service. it can be downloaded from
 
 https://github.com/pushio/PushIOManager_iOS
 
-module.xcconfig needs to be updated so that it can find the framework file.
+module.xcconfig needs to be updated to point the absolute path of the folder containing PushIOManager.framework. The current supported
+version of the framework has been included for convenience.
 
 OTHER_LDFLAGS=$(inherited) -F"[PUSHIO_FRAMEWOK_DIR]"  -framework PushIOManager
 
