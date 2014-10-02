@@ -62,80 +62,42 @@
 	[super shutdown:sender];
 }
 
--(void)registerForPushNotifications:(id)args
+-(void)load
 {
-	ENSURE_SINGLE_ARG(args,NSDictionary);
-	
-	UIApplication * app = [UIApplication sharedApplication];
-	UIRemoteNotificationType ourNotifications = [app enabledRemoteNotificationTypes];
-	
-	NSArray *typesRequested = [args objectForKey:@"types"];
-	
-	RELEASE_TO_NIL(pushNotificationCallback);
-	RELEASE_TO_NIL(pushNotificationError);
-	RELEASE_TO_NIL(pushNotificationSuccess);
-	
-	pushNotificationSuccess = [[args objectForKey:@"success"] retain];
-	pushNotificationError = [[args objectForKey:@"error"] retain];
-	pushNotificationCallback = [[args objectForKey:@"callback"] retain];
-	
-	if (typesRequested!=nil)
-	{
-		for (id thisTypeRequested in typesRequested)
-		{
-			NSInteger value = [TiUtils intValue:thisTypeRequested];
-			switch(value)
-			{
-				case 1: //NOTIFICATION_TYPE_BADGE
-				{
-					ourNotifications |= UIRemoteNotificationTypeBadge;
-					break;
-				}
-				case 2: //NOTIFICATION_TYPE_ALERT
-				{
-					ourNotifications |= UIRemoteNotificationTypeAlert;
-					break;
-				}
-				case 3: //NOTIFICATION_TYPE_SOUND
-				{
-					ourNotifications |= UIRemoteNotificationTypeSound;
-					break;
-				}
-				case 4: // NOTIFICATION_TYPE_NEWSSTAND
-				{
-					ourNotifications |= UIRemoteNotificationTypeNewsstandContentAvailability;
-					break;
-				}
-			}
-		}
-	}
-    
     [[PushIOManager sharedInstance] setDelegate:self];
     [[PushIOManager sharedInstance] didFinishLaunchingWithOptions:[[TiApp app] launchOptions]];
     [[PushIOManager sharedInstance] setDebugLevel:PUSHIO_DEBUG_VERBOSE];
     
-    [[TiApp app] setRemoteNotificationDelegate:self];
-    
-	[app registerForRemoteNotificationTypes:ourNotifications];
-    
-    
-	// check to see upon registration if we were started with a push
-	// notification and if so, go ahead and trigger our callback
-	id currentNotification = [[TiApp app] remoteNotification];
-    
-	if (currentNotification!=nil && pushNotificationCallback!=nil)
-	{
-		NSMutableDictionary * event = [TiUtils dictionaryWithCode:0 message:nil];
-		[event setObject:currentNotification forKey:@"data"];
-		[event setObject:NUMBOOL(YES) forKey:@"inBackground"];
-		[self _fireEventToListener:@"remote" withObject:event listener:pushNotificationCallback thisObject:nil];
-	}
+	// Register to receive a notification for the application launching
+    // This mechanism allows the module to perform actions during application startup
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRemoteNotification:)name:@"UIApplicationDidFinishLaunchingNotification" object:nil];
 }
 
--(void)unregisterForPushNotifications:(id)args
+- (void) didReceiveRemoteNotification:(NSNotification *)notification
 {
-	UIApplication * app = [UIApplication sharedApplication];
-	[app unregisterForRemoteNotifications];
+    NSLog(@"[INFO] PushIO didReceiveRemoteNotification");
+    [[PushIOManager sharedInstance] didReceiveRemoteNotification:[notification userInfo]];
+}
+
+
+-(void)registerDevice:(id)arg
+{
+	ENSURE_SINGLE_ARG(arg, NSString);
+   
+    // The token received in the success callback to 'Ti.Network.registerForPushNotifications' is a hex-encode
+    // string. We need to convert it back to it's byte format as an NSData object.
+    NSMutableData *deviceToken = [[NSMutableData alloc] init];
+    unsigned char whole_byte;
+    char byte_chars[3] = { '\0', '\0', '\0' };
+    int i;
+    for (i=0; i<[arg length]/2; i++) {
+        byte_chars[0] = [arg characterAtIndex:i*2];
+        byte_chars[1] = [arg characterAtIndex:i*2+1];
+        whole_byte = strtol(byte_chars, NULL, 16);
+        [deviceToken appendBytes:&whole_byte length:1];
+    }
+    
+    [[PushIOManager sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 
@@ -145,9 +107,6 @@
 {
 	// release any resources that have been retained by the module
 	[super dealloc];
-    RELEASE_TO_NIL(pushNotificationCallback);
-	RELEASE_TO_NIL(pushNotificationError);
-	RELEASE_TO_NIL(pushNotificationSuccess);
 }
 
 #pragma mark Internal Memory Management
@@ -160,58 +119,6 @@
 }
 
 #pragma mark Push Notification Delegates
-
-
--(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSLog(@"[INFO] didRegisterForRemoteNotificationsWithDeviceToken %@ ",deviceToken);
-    [[PushIOManager sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-    
-	// called by TiApp
-	if (pushNotificationSuccess!=nil)
-	{
-		NSString *token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<"withString:@""]
-							stringByReplacingOccurrencesOfString:@">" withString:@""]
-						   stringByReplacingOccurrencesOfString: @" " withString: @""];
-		NSMutableDictionary * event = [TiUtils dictionaryWithCode:0 message:nil];
-		[event setObject:token forKey:@"deviceToken"];
-		[self _fireEventToListener:@"remote" withObject:event listener:pushNotificationSuccess thisObject:nil];
-	}
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-     NSLog(@"[INFO] didReceiveRemoteNotification");
-    [[PushIOManager sharedInstance] didReceiveRemoteNotification:userInfo];
-    
-	// called by TiApp
-	if (pushNotificationCallback!=nil)
-	{
-		NSMutableDictionary * event = [TiUtils dictionaryWithCode:0 message:nil];
-		[event setObject:userInfo forKey:@"data"];
-		BOOL inBackground = (application.applicationState != UIApplicationStateActive);
-		[event setObject:NUMBOOL(inBackground) forKey:@"inBackground"];
-		[self _fireEventToListener:@"remote" withObject:event listener:pushNotificationCallback thisObject:nil];
-	}
-}
-
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-    
-     NSLog(@"[INFO] didFailToRegisterForRemoteNotificationsWithError %@ ",error);
-    [[PushIOManager sharedInstance] didFailToRegisterForRemoteNotificationsWithError:error];
-
-	// called by TiApp
-	if (pushNotificationError!=nil)
-	{
-		NSString * message = [TiUtils messageFromError:error];
-		NSMutableDictionary * event = [TiUtils dictionaryWithCode:[error code] message:message];
-		[self _fireEventToListener:@"remote" withObject:event listener:pushNotificationError thisObject:nil];
-	}
-}
-
-
-#pragma mark Push IO
 
 - (void) readyForRegistration
 {
@@ -237,10 +144,7 @@
     NSLog(@"Push IO new newstand content available");
 }
 
-#pragma mark Listener Notifications
-
-
-#pragma Public APIs
+#pragma mark Push IO
 
 #pragma Public APIs - Category
 // Any categories not present in the array will be degregistered if already registered with the server.

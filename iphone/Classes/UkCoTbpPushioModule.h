@@ -24,10 +24,6 @@
 
 @interface UkCoTbpPushioModule : TiModule <PushIOManagerDelegate>{
 @private
-	TiNetworkConnectionState state;
-	KrollCallback *pushNotificationCallback;
-	KrollCallback *pushNotificationError;
-	KrollCallback *pushNotificationSuccess;
 }
 
 @end

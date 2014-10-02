@@ -73,11 +73,12 @@ See documentation folder for more.
  
 
 
-TESTING YOUR MODULE
+TESTING 
 -------------------
 
-To test with the script, execute:
+copy your pushio_config_debug.json to assets folder
 
-	titanium run --dir=YOURMODULEDIR
+cd iphone  
+titanium.py run
 
 This will execute the app.js in the example folder as a Titanium application.
