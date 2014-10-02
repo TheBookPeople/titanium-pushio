@@ -26,5 +26,6 @@
 // IMPORTANT NOTE: always use $(inherited) in your overrides
 //
 
-OTHER_LDFLAGS=$(inherited) -F"[PUSHIO_FRAMEWOK_DIR]"  -framework PushIOManager
+// [PUSH_IO_DIR] needs to be replaced with the folder that contains PushIOManager.framework
+OTHER_LDFLAGS=$(inherited) -F"[PUSH_IO_DIR]"  -framework PushIOManager
 

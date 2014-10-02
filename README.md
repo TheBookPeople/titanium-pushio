@@ -2,21 +2,50 @@
 
 This is a Titanium Mobile Mobile module project that adds PushIO
 (http://www.responsys.com/marketing-cloud/products/push-IO) notifications to a project. 
+
 This module currently only supports iOS. You will need a PushIO account to use this module.
 
+## Setup
+
+### Build
+
+To build the module run the following code from the iphone folder
+
+```shell
+./build.py
+```
+
+### Install - Mac OS X
+
+Extract distribution zip file
+Copy modules/iphone/uk.co.tbp.pushio to ~/Library/Application Support/Titanium/modules/iphone
+
+### Register the Module
+
+Register the module with your application by editing `tiapp.xml` and adding your module.
+Example:
+
+```xml
+<modules>
+	<module version="1.0">uk.co.tbp.pushio</module>
+</modules>
+```
 
 ## Accessing the push-io Module
 
 To access this module from JavaScript, you would do the following:
 
-    var push_io = require("uk.co.tbp.pushio");
+```javascript
+var push_io = require("uk.co.tbp.pushio");
+```
 
 The push_io variable is a reference to the Module object.
 
-## Setup
 
 
-### pushio___config_debug.json
+When you run your project, the compiler will combine your module along with its dependencies and assets into the application.
+
+### pushio_config_debug.json
 
 The  pushio_config_debug.json file that is created in the PushIO management interface needs to be copied to
 the assets folder of your titanium application.
@@ -30,7 +59,10 @@ https://github.com/pushio/PushIOManager_iOS
 module.xcconfig needs to be updated to point the absolute path of the folder containing PushIOManager.framework. The current supported
 version of the framework has been included for convenience.
 
-OTHER_LDFLAGS=$(inherited) -F"[PUSHIO_FRAMEWOK_DIR]"  -framework PushIOManager
+e.g.
+```
+OTHER_LDFLAGS=$(inherited) -F"/Users/[username]/Development/projects/titanium-pushio/iphone"  -framework PushIOManager
+```
 
 ### Build
 
@@ -44,30 +76,38 @@ To build the module run the following code from the iphone folder
 
 
 ### Registering for notification
-The registration method has the same signature as the built in Titanium Ti.Network.registerForPushNotifications.
-It also uses the same constant for determining the type of notification to accept. When the registerForPushNotifications
-method is called if it is successful the device will be registered for broadcast messages.
+
+Use the Ti.Network.registerForPushNotifications method to register for notifications. This is usually placed in alloy.js
 
 ```javascript
-  var push_io = require('uk.co.tbp.pushio');
-  push_io.registerForPushNotifications({
-    // Specifies which notifications to receive
-    types : [Ti.Network.NOTIFICATION_TYPE_BADGE, 
-             Ti.Network.NOTIFICATION_TYPE_ALERT, 
-             Ti.Network.NOTIFICATION_TYPE_SOUND],
+var deviceToken = null;
+var pushio = require('uk.co.tbp.pushio');
 
-    success : function(e) {
-      alert('Device token : ' + JSON.stringify(e));
-    },
+Ti.Network.registerForPushNotifications({
+  // Specifies which notifications to receive
+  types : [ Ti.Network.NOTIFICATION_TYPE_BADGE, 
+            Ti.Network.NOTIFICATION_TYPE_ALERT, 
+            Ti.Network.NOTIFICATION_TYPE_SOUND],
+  success : deviceTokenSuccess,
+  error : deviceTokenError,
+  callback : receivePush
+});
 
-    error : function(e) {
-      alert('error: ' + JSON.stringify(e));
-    },
+// Process incoming push notifications
+function receivePush(e) {
+  pushio.recordNotification(e.data);
+  alert('Received push: ' + JSON.stringify(e));
+}
 
-    callback : function(e) {
-      alert('callback: ' + JSON.stringify(e));
-      }
-  });
+// Save the device token for subsequent API calls
+function deviceTokenSuccess(e) {
+  pushio.registerDevice(e.deviceToken);
+  deviceToken = e.deviceToken;
+}
+
+function deviceTokenError(e) {
+  alert('Failed to register for push notifications! ' + e.error);
+}
 ```  
 
 ## Categories
@@ -130,7 +170,9 @@ if you need to integrate with Responsys you will need to use the plain value.
 The following identifies are supported for Responsys integration.
 
 Email
+
 Phone Number
+
 Customer Id 
 
 You must use the same identifier type for all users. 
@@ -175,7 +217,7 @@ push_io.registeredUserID()
 
 Custom engagement metrics can be tracked using the trackEngagementCustomMetric method.  
 
-```javascript  
+```javascript
 push_io.trackEngagementCustomMetric('Purchased')
 ``` 
 
