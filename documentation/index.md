@@ -16,7 +16,7 @@ The push_io variable is a reference to the Module object.
 ## Setup
 
 
-### pushio___config_debug.json
+### pushio_config_debug.json
 
 The  pushio_config_debug.json file that is created in the PushIO management interface needs to be copied to
 the assets folder of your titanium application.
@@ -30,7 +30,10 @@ https://github.com/pushio/PushIOManager_iOS
 module.xcconfig needs to be updated to point the absolute path of the folder containing PushIOManager.framework. The current supported
 version of the framework has been included for convenience.
 
-OTHER_LDFLAGS=$(inherited) -F"[PUSHIO_FRAMEWOK_DIR]"  -framework PushIOManager
+e.g.
+```
+OTHER_LDFLAGS=$(inherited) -F"/Users/[username]/Development/projects/titanium-pushio/iphone"  -framework PushIOManager
+```
 
 ### Build
 
@@ -48,26 +51,34 @@ The registration method has the same signature as the built in Titanium Ti.Netwo
 It also uses the same constant for determining the type of notification to accept. When the registerForPushNotifications
 method is called if it is successful the device will be registered for broadcast messages.
 
-```javascript
-  var push_io = require('uk.co.tbp.pushio');
-  push_io.registerForPushNotifications({
-    // Specifies which notifications to receive
-    types : [Ti.Network.NOTIFICATION_TYPE_BADGE, 
-             Ti.Network.NOTIFICATION_TYPE_ALERT, 
-             Ti.Network.NOTIFICATION_TYPE_SOUND],
+```
+var deviceToken = null;
+var pushio = require('uk.co.tbp.pushio');
 
-    success : function(e) {
-      alert('Device token : ' + JSON.stringify(e));
-    },
+Ti.Network.registerForPushNotifications({
+  // Specifies which notifications to receive
+  types : [ Ti.Network.NOTIFICATION_TYPE_BADGE, 
+            Ti.Network.NOTIFICATION_TYPE_ALERT, 
+            Ti.Network.NOTIFICATION_TYPE_SOUND],
+  success : deviceTokenSuccess,
+  error : deviceTokenError,
+  callback : receivePush
+});
 
-    error : function(e) {
-      alert('error: ' + JSON.stringify(e));
-    },
+// Process incoming push notifications
+function receivePush(e) {
+  alert('Received push: ' + JSON.stringify(e));
+}
 
-    callback : function(e) {
-      alert('callback: ' + JSON.stringify(e));
-      }
-  });
+// Save the device token for subsequent API calls
+function deviceTokenSuccess(e) {
+  pushio.registerDevice(e.deviceToken);
+  deviceToken = e.deviceToken;
+}
+
+function deviceTokenError(e) {
+  alert('Failed to register for push notifications! ' + e.error);
+}
 ```  
 
 ## Categories
@@ -78,7 +89,7 @@ This section has method calls associated with notification categories.
 
 To register for a category use the registerCategory method on the push_io variable.
 
-```javascript
+```
 push_io.registerCategory('Banana'); 
 ``` 
 
@@ -86,14 +97,14 @@ push_io.registerCategory('Banana');
 
 To register for multiple categories at once use the registerCategory method on the push_io variable.
 
-```javascript
+```
 push_io.registerCategories(['Apples','Oranges']);
 ``` 
 ### Unregistering category
 
 To unregister for a category use the unregisterCategory method on the push_io variable.
 
-```javascript
+```
 push_io.unregisterCategory('Banana'); 
 ``` 
 
@@ -101,14 +112,14 @@ push_io.unregisterCategory('Banana');
 
 To unregister for a category use the unregisterCategory method on the push_io variable.
 
-```javascript
+```
 push_io.unregisterCategories(['Apples','Oranges']); 
 ``` 
 ### Unregistering all categories
 
 To unregister for a category use the unregisterCategory method on the push_io variable.
 
-```javascript
+```
 push_io.unregisterAllCategories(); 
 ``` 
 
@@ -116,7 +127,7 @@ push_io.unregisterAllCategories();
 
 The isRegisteredForCategory method can be used to check if you are registered for a category.
 
-```javascript
+```
 if(push_io.isRegisteredForCategory('Bannana')){
   Ti.API.Info('We will have been registered for Bannanas');
 }
@@ -140,7 +151,7 @@ You must use the same identifier type for all users.
 To register a user identifier with a device call the registerUserID method. This is usually done after a successfully
 logout event.  
 
-```javascript
+```
 push_io.registerUserID('me@example.com'); 
 ``` 
 ### Unregister a user identifier
@@ -148,7 +159,7 @@ push_io.registerUserID('me@example.com');
 To unregister a user identifier with a device call the unregisterUserID method. This is usually done after a successfully
 logout event.
 
-```javascript
+```
 push_io.unregisterUserID('me@example.com'); 
 ``` 
 
@@ -156,7 +167,7 @@ push_io.unregisterUserID('me@example.com');
 
 The isRegisteredForUserID method can be used to check if you are registered for the device.
 
-```javascript
+```
 if(push_io.isRegisteredForUserID('me@example.com')){
   Ti.API.Info('We will have been associated with this device.');
 }
@@ -166,7 +177,7 @@ if(push_io.isRegisteredForUserID('me@example.com')){
 
 The registeredUserID method returns the current user identifier registered for the device.
 
-```javascript
+```
 push_io.registeredUserID()
 ``` 
 
@@ -175,7 +186,7 @@ push_io.registeredUserID()
 
 Custom engagement metrics can be tracked using the trackEngagementCustomMetric method.  
 
-```javascript  
+```  
 push_io.trackEngagementCustomMetric('Purchased')
 ``` 
 

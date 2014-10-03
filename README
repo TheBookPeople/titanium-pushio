@@ -20,6 +20,7 @@ Windows
 Copy the distribution zip file into the `C:\ProgramData\Titanium` folder
 
 
+
 REGISTER THE MODULE
 --------------------
 
@@ -37,37 +38,39 @@ and assets into the application.
 USING THE MODULE IN CODE
 -------------------------
 
+Copy your pushio_config_debug.json that you get from the PushIO website to project assets folder.
+
 To use your module in code, you will need to require it.
 
 For example,
 
-	var pushio = require('uk.co.tbp.pushio');
-  
-  pushio.registerForPushNotifications({
-      // Specifies which notifications to receive
-      types: [
-          Ti.Network.NOTIFICATION_TYPE_BADGE,
-          Ti.Network.NOTIFICATION_TYPE_ALERT,
-          Ti.Network.NOTIFICATION_TYPE_SOUND
-      ],
-      success: deviceTokenSuccess,
-      error: deviceTokenError,
-      callback: receivePush
-  });
+var deviceToken = null;
+var pushio = require('uk.co.tbp.pushio');
 
-  // Process incoming push notifications
-  function receivePush(e) {
-      alert('Received push: ' + JSON.stringify(e));
-  }
+Ti.Network.registerForPushNotifications({
+  // Specifies which notifications to receive
+  types : [ Ti.Network.NOTIFICATION_TYPE_BADGE, 
+            Ti.Network.NOTIFICATION_TYPE_ALERT, 
+            Ti.Network.NOTIFICATION_TYPE_SOUND],
+  success : deviceTokenSuccess,
+  error : deviceTokenError,
+  callback : receivePush
+});
 
-  // Save the device token for subsequent API calls
-  function deviceTokenSuccess(e) {
-      alert('Registered for push notifications! ' + e.deviceToken);
-  }
+// Process incoming push notifications
+function receivePush(e) {
+  alert('Received push: ' + JSON.stringify(e));
+}
 
-  function deviceTokenError(e) {
-      alert('Failed to register for push notifications! ' + e.error);
-  }
+// Save the device token for subsequent API calls
+function deviceTokenSuccess(e) {
+  pushio.registerDevice(e.deviceToken);
+  deviceToken = e.deviceToken;
+}
+
+function deviceTokenError(e) {
+  alert('Failed to register for push notifications! ' + e.error);
+}
 
 See documentation folder for more.
  
@@ -75,8 +78,6 @@ See documentation folder for more.
 
 TESTING 
 -------------------
-
-copy your pushio_config_debug.json to assets folder
 
 cd iphone  
 titanium.py run
