@@ -2,7 +2,24 @@
 
 This is a Titanium Mobile Mobile module project that adds PushIO
 (http://www.responsys.com/marketing-cloud/products/push-IO) notifications to a project. 
+
 This module currently only supports iOS. You will need a PushIO account to use this module.
+
+## Setup
+
+### Build
+
+To build the module run the following code from the iphone folder
+
+```
+./build.py
+```
+
+### Install - Mac OS X
+
+Extract distribution zip file
+Copy modules/iphone/uk.co.tbp.pushio to ~/Library/Application Support/Titanium/modules/iphone
+
 
 
 ## Accessing the push-io Module
@@ -13,7 +30,20 @@ To access this module from JavaScript, you would do the following:
 
 The push_io variable is a reference to the Module object.
 
-## Setup
+
+
+
+### Register the Module
+
+Register the module with your application by editing `tiapp.xml` and adding your module.
+Example:
+
+<modules>
+	<module version="1.0">uk.co.tbp.pushio</module>
+</modules>
+
+When you run your project, the compiler will combine your module along with its dependencies and assets into the application.
+
 
 
 ### pushio_config_debug.json
@@ -47,9 +77,8 @@ To build the module run the following code from the iphone folder
 
 
 ### Registering for notification
-The registration method has the same signature as the built in Titanium Ti.Network.registerForPushNotifications.
-It also uses the same constant for determining the type of notification to accept. When the registerForPushNotifications
-method is called if it is successful the device will be registered for broadcast messages.
+
+Use the Ti.Network.registerForPushNotifications method to register for notifications. This is usually placed in alloy.js
 
 ```
 var deviceToken = null;
