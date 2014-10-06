@@ -20,7 +20,16 @@ To build the module run the following code from the iphone folder
 Extract distribution zip file
 Copy modules/iphone/uk.co.tbp.pushio to ~/Library/Application Support/Titanium/modules/iphone
 
+### Register the Module
 
+Register the module with your application by editing `tiapp.xml` and adding your module.
+Example:
+
+```xml
+<modules>
+	<module version="1.0">uk.co.tbp.pushio</module>
+</modules>
+```
 
 ## Accessing the push-io Module
 
@@ -32,16 +41,7 @@ var push_io = require("uk.co.tbp.pushio");
 
 The push_io variable is a reference to the Module object.
 
-### Register the Module
 
-Register the module with your application by editing `tiapp.xml` and adding your module.
-Example:
-
-```xml
-<modules>
-	<module version="1.0">uk.co.tbp.pushio</module>
-</modules>
-```
 
 When you run your project, the compiler will combine your module along with its dependencies and assets into the application.
 
