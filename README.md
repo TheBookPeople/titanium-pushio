@@ -45,8 +45,6 @@ The push_io variable is a reference to the Module object.
 
 When you run your project, the compiler will combine your module along with its dependencies and assets into the application.
 
-
-JavaScript
 ### pushio_config_debug.json
 
 The  pushio_config_debug.json file that is created in the PushIO management interface needs to be copied to
@@ -172,7 +170,9 @@ if you need to integrate with Responsys you will need to use the plain value.
 The following identifies are supported for Responsys integration.
 
 Email
+
 Phone Number
+
 Customer Id 
 
 You must use the same identifier type for all users. 
