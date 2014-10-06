@@ -48,12 +48,13 @@
 	// this method is called when the module is first loaded
 	// you *must* call the superclass
 	[super startup];
-
-	NSLog(@"[INFO] %@ loaded",self);
+    
+    NSLog(@"[DEBUG] Startup PushIO module %@",self);
 }
 
 -(void)shutdown:(id)sender
 {
+     NSLog(@"[DEBUG] Shutdown PushIO module");
 	// this method is called when the module is being unloaded
 	// typically this is during shutdown. make sure you don't do too
 	// much processing here or the app will be quit forceably
@@ -64,25 +65,18 @@
 
 -(void)load
 {
+    NSLog(@"[DEBUG] Load PushIO module");
+    
     [[PushIOManager sharedInstance] setDelegate:self];
     [[PushIOManager sharedInstance] didFinishLaunchingWithOptions:[[TiApp app] launchOptions]];
     [[PushIOManager sharedInstance] setDebugLevel:PUSHIO_DEBUG_VERBOSE];
-    
-	// Register to receive a notification for the application launching
-    // This mechanism allows the module to perform actions during application startup
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRemoteNotification:)name:@"UIApplicationDidFinishLaunchingNotification" object:nil];
 }
-
-- (void) didReceiveRemoteNotification:(NSNotification *)notification
-{
-    NSLog(@"[INFO] PushIO didReceiveRemoteNotification");
-    [[PushIOManager sharedInstance] didReceiveRemoteNotification:[notification userInfo]];
-}
-
 
 -(void)registerDevice:(id)arg
 {
 	ENSURE_SINGLE_ARG(arg, NSString);
+    NSLog(@"[DEBUG] PushIO registerDevice");
+
    
     // The token received in the success callback to 'Ti.Network.registerForPushNotifications' is a hex-encode
     // string. We need to convert it back to it's byte format as an NSData object.
@@ -98,6 +92,16 @@
     }
     
     [[PushIOManager sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+-(void)recordNotification:(id)arg
+{
+	id userInfo = [arg objectAtIndex:0];
+	ENSURE_DICT(userInfo);
+	
+	NSLog(@"[DEBUG] PushIO recived notification");
+    
+	[[PushIOManager sharedInstance] didReceiveRemoteNotification:userInfo];
 }
 
 

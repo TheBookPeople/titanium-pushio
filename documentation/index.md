@@ -67,6 +67,7 @@ Ti.Network.registerForPushNotifications({
 
 // Process incoming push notifications
 function receivePush(e) {
+  pushio.recordNotification(e.data);
   alert('Received push: ' + JSON.stringify(e));
 }
 
