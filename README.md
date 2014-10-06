@@ -11,7 +11,7 @@ This module currently only supports iOS. You will need a PushIO account to use t
 
 To build the module run the following code from the iphone folder
 
-```
+```shell
 ./build.py
 ```
 
@@ -26,26 +26,27 @@ Copy modules/iphone/uk.co.tbp.pushio to ~/Library/Application Support/Titanium/m
 
 To access this module from JavaScript, you would do the following:
 
-    var push_io = require("uk.co.tbp.pushio");
+```javascript
+var push_io = require("uk.co.tbp.pushio");
+```
 
 The push_io variable is a reference to the Module object.
-
-
-
 
 ### Register the Module
 
 Register the module with your application by editing `tiapp.xml` and adding your module.
 Example:
 
+```xml
 <modules>
 	<module version="1.0">uk.co.tbp.pushio</module>
 </modules>
+```
 
 When you run your project, the compiler will combine your module along with its dependencies and assets into the application.
 
 
-
+JavaScript
 ### pushio_config_debug.json
 
 The  pushio_config_debug.json file that is created in the PushIO management interface needs to be copied to
@@ -80,7 +81,7 @@ To build the module run the following code from the iphone folder
 
 Use the Ti.Network.registerForPushNotifications method to register for notifications. This is usually placed in alloy.js
 
-```
+```javascript
 var deviceToken = null;
 var pushio = require('uk.co.tbp.pushio');
 
@@ -119,7 +120,7 @@ This section has method calls associated with notification categories.
 
 To register for a category use the registerCategory method on the push_io variable.
 
-```
+```javascript
 push_io.registerCategory('Banana'); 
 ``` 
 
@@ -127,14 +128,14 @@ push_io.registerCategory('Banana');
 
 To register for multiple categories at once use the registerCategory method on the push_io variable.
 
-```
+```javascript
 push_io.registerCategories(['Apples','Oranges']);
 ``` 
 ### Unregistering category
 
 To unregister for a category use the unregisterCategory method on the push_io variable.
 
-```
+```javascript
 push_io.unregisterCategory('Banana'); 
 ``` 
 
@@ -142,14 +143,14 @@ push_io.unregisterCategory('Banana');
 
 To unregister for a category use the unregisterCategory method on the push_io variable.
 
-```
+```javascript
 push_io.unregisterCategories(['Apples','Oranges']); 
 ``` 
 ### Unregistering all categories
 
 To unregister for a category use the unregisterCategory method on the push_io variable.
 
-```
+```javascript
 push_io.unregisterAllCategories(); 
 ``` 
 
@@ -157,7 +158,7 @@ push_io.unregisterAllCategories();
 
 The isRegisteredForCategory method can be used to check if you are registered for a category.
 
-```
+```javascript
 if(push_io.isRegisteredForCategory('Bannana')){
   Ti.API.Info('We will have been registered for Bannanas');
 }
@@ -181,7 +182,7 @@ You must use the same identifier type for all users.
 To register a user identifier with a device call the registerUserID method. This is usually done after a successfully
 logout event.  
 
-```
+```javascript
 push_io.registerUserID('me@example.com'); 
 ``` 
 ### Unregister a user identifier
@@ -189,7 +190,7 @@ push_io.registerUserID('me@example.com');
 To unregister a user identifier with a device call the unregisterUserID method. This is usually done after a successfully
 logout event.
 
-```
+```javascript
 push_io.unregisterUserID('me@example.com'); 
 ``` 
 
@@ -197,7 +198,7 @@ push_io.unregisterUserID('me@example.com');
 
 The isRegisteredForUserID method can be used to check if you are registered for the device.
 
-```
+```javascript
 if(push_io.isRegisteredForUserID('me@example.com')){
   Ti.API.Info('We will have been associated with this device.');
 }
@@ -207,7 +208,7 @@ if(push_io.isRegisteredForUserID('me@example.com')){
 
 The registeredUserID method returns the current user identifier registered for the device.
 
-```
+```javascript
 push_io.registeredUserID()
 ``` 
 
@@ -216,7 +217,7 @@ push_io.registeredUserID()
 
 Custom engagement metrics can be tracked using the trackEngagementCustomMetric method.  
 
-```  
+```javascript
 push_io.trackEngagementCustomMetric('Purchased')
 ``` 
 
