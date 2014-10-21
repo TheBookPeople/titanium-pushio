@@ -5,9 +5,17 @@
 //  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.10.5
+// This version of the PushIOManager library is 2.10.9
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+//! Project version number for PushIOManager.
+FOUNDATION_EXPORT double PushIOManagerVersionNumber;
+
+//! Project version string for PushIOManager.
+FOUNDATION_EXPORT const unsigned char PushIOManagerVersionString[];
+
 
 // IMPORTANT: To use the Push IO service, you are required to have a PushIO API key. You can
 // obtain this by setting up an account and adding an app at https://manage.push.io
@@ -56,7 +64,8 @@ typedef enum  {
     PUSHIO_ENGAGEMENT_METRIC_INAPP_PURCHASE = 2,
     PUSHIO_ENGAGEMENT_METRIC_PREMIUM_CONTENT = 3,
     PUSHIO_ENGAGEMENT_METRIC_SOCIAL = 4,
-    PUSHIO_ENGAGEMENT_METRIC_OTHER = 5, // Push IO internal use
+    PUSHIO_ENGAGEMENT_METRIC_ACTION = 5, // Push IO internal use
+    PUSHIO_ENGAGEMENT_METRIC_OTHER = 6, // Push IO internal use
 } PushIOEngagementMetrics;
 
 // Because 64-bit suppport added to iOS requires a iOS6.0 deployment target or higher, this version of the framework
@@ -107,6 +116,20 @@ typedef enum  {
 - (void) didReceiveRemoteNotification:(NSDictionary *)userInfo;
 - (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void) didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+// When engagement is finished, call the fetch completion handler with the indicated fetch result
+// Engagement call will occur within five seconds of this call being activated.
+- (void) didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionResult:(UIBackgroundFetchResult)fetchResult fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler;
+#endif
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+// Note that PushIOManager will call the completion handler, so make sure you do any additional procesisng before this call.
+// Engagement call will occur within five seconds of this call beeing activated.
+- (void) handleActionWithIdentifier:(NSString *)identifier
+              forRemoteNotification:(NSDictionary *)userInfo
+                  completionHandler:(void (^)(void))completionHandler;
+#endif
 
 //
 //
@@ -172,6 +195,20 @@ typedef enum  {
 //
 // Other Helpers
 //
+
+// Convieneince methods for asking iOS to register for push
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+
+// Combines the new iOS8 calls for registering settings and asking the system to register for remote notifications.
+- (void) registerForRemoteNotificationWithSettings:(UIUserNotificationSettings *)settings;
+
+#endif
+                                                                                       
+// Calls either of the registration calls above depending on OS version, registering for Sound/Badge/Alert types.  It does not register for newsstand.
+- (void) registerForAllRemoteNotificationTypes;
+
+
 // Currently in-use Push IO api settings
 - (NSString *) pushIOAPIHost;
 - (NSString *) pushIOAPIKey;

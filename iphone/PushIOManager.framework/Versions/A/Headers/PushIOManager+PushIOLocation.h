@@ -11,11 +11,11 @@
 
 typedef enum
 {
-    UNKNOWN = 0,
-    USER_DISABLED_LOCATION,
-    DEVICE_DOES_NOT_SUPPORT_LOCATION,
-    DEVICE_CANNOT_MONITOR_REGIONS,
-    LOCATION_TEMP_ERROR
+    PUSHIO_LOCATION_ERROR_UNKNOWN = 0,
+    PUSHIO_LOCATION_ERROR_USER_DISABLED_LOCATION,
+    PUSHIO_LOCATION_ERROR_DEVICE_DOES_NOT_SUPPORT_LOCATION,
+    PUSHIO_LOCATION_ERROR_DEVICE_CANNOT_MONITOR_REGIONS,
+    PUSHIO_LOCATION_ERROR_LOCATION_TEMP_ERROR
 }
 PushIOLocationError;
 
@@ -52,7 +52,7 @@ PushIOLocationError;
 // Two options are presented for location management, The first where PushIOManager maintains a CLLocationManager.
 // In the second option you simply feed PushIOManager locations to record.
 // In either option locations, if availaible, are set to PushIO on during any engagement tracking.
-// Note that if you are providing locations directly, make sure to provide them BEFORE engagemnet calls.
+// Note that if you are providing locations directly, make sure to provide them BEFORE engagement calls.
 
 // =========== Option (1) - pushIOManager can create and maintian a LocationManager.
 
@@ -63,7 +63,14 @@ PushIOLocationError;
 // Call this before you start monitoring for location updates.
 @property (nonatomic, copy) NSString *locationPurpose;
 
-// These calls tell PushIO to start monitoring location for push notification engagemnet tracking.
+// For iOS8+, the internal locatin manager needs to request either Always or InUse location permissions.
+// Your applciation must provide one of two
+// keys in your info.plist giving the reason why you are requesting location access:
+// NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription
+// If neither key is present or the wrong key is present location monitoring will not work.  Whichever key is present determines
+// which permission the internal location manager asks for.
+
+// These calls tell PushIO to start monitoring location for push notification engagement tracking.
 // Note that the pushIOManager library will maintain a CoreLocation LocationManager, and manage shutting down
 // or starting up this location manager when the application suspends/resume.
 // You need only call "startDetectingLocation" at the point in your aplication lifecycle when you feel it approprriate
@@ -98,7 +105,7 @@ PushIOLocationError;
 // =========== Option (2) - you can manage your own CoreLocation manager.
 
 // Use this call to tell the pushIOManager when location changes.
-// This same location will be passed back to PushIO for engagemnet tracking when set.
+// This same location will be passed back to PushIO for engagement tracking when set.
 // The location persists for the life of the application, until changed again or the application is shut down.
 // You can make a new CLLocation object from lat/long values using the CLLocation initWithLatitude:longitude: method.
 // If you call this more often than every ten minutes, the revsied location will be held until twn minutes have passed, then a

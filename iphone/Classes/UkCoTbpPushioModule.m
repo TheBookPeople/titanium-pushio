@@ -150,6 +150,13 @@
 
 #pragma mark Push IO
 
+// A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io
+// This call will always return a non-null value.
+- (id) pushIOUUID{
+    return [[PushIOManager sharedInstance] pushIOUUID];
+}
+
+
 #pragma Public APIs - Category
 // Any categories not present in the array will be degregistered if already registered with the server.
 // An empty array is treated as an Unregister call.
