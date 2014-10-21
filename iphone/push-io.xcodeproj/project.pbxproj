@@ -50,7 +50,6 @@
 		AA747D9E0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkCoTbpPushio_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE03349E19B86F840032B7EB /* PushIOManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushIOManager.framework; sourceTree = "<group>"; };
-		BE0334A219B86FA10032B7EB /* pushio_config_debug.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pushio_config_debug.json; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libUkCoTbpPushio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUkCoTbpPushio.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -98,7 +97,6 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				BE0334A219B86FA10032B7EB /* pushio_config_debug.json */,
 				24DE9E0F11C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* UkCoTbpPushioModule.h */,

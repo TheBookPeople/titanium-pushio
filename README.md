@@ -110,6 +110,14 @@ function deviceTokenError(e) {
 }
 ```  
 
+## PushIO
+
+A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io This call will always return a non-null value.
+
+```javascript
+Ti.API.Info(push_io.pushIOUUID); 
+``` 
+
 ## Categories
 
 This section has method calls associated with notification categories.
