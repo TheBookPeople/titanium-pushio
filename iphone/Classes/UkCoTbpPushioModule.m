@@ -104,6 +104,15 @@
 	[[PushIOManager sharedInstance] didReceiveRemoteNotification:userInfo];
 }
 
+-(void)overridePushIOAPIKey:(id)apiKey
+{
+    ENSURE_ARG_COUNT(apiKey, 1);
+    ENSURE_TYPE([apiKey objectAtIndex:0], NSString);
+    
+    [[PushIOManager sharedInstance] setOverridePushIOAPIKey:[apiKey objectAtIndex:0]];
+}
+
+
 
 #pragma mark Cleanup
 
@@ -149,6 +158,13 @@
 }
 
 #pragma mark Push IO
+
+// A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io
+// This call will always return a non-null value.
+- (id) pushIOUUID{
+    return [[PushIOManager sharedInstance] pushIOUUID];
+}
+
 
 #pragma Public APIs - Category
 // Any categories not present in the array will be degregistered if already registered with the server.

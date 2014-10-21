@@ -22,13 +22,20 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		13690B861A0283B40034BB52 /* PIORegion.h in Headers */ = {isa = PBXBuildFile; fileRef = 13690B7E1A0283B40034BB52 /* PIORegion.h */; };
+		13690B871A0283B40034BB52 /* PushIOCustomTrackerPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = 13690B7F1A0283B40034BB52 /* PushIOCustomTrackerPublisher.h */; };
+		13690B881A0283B40034BB52 /* PushIOManager in Frameworks */ = {isa = PBXBuildFile; fileRef = 13690B801A0283B40034BB52 /* PushIOManager */; };
+		13690B891A0283B40034BB52 /* PushIOManager+PushIOLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 13690B811A0283B40034BB52 /* PushIOManager+PushIOLocation.h */; };
+		13690B8A1A0283B40034BB52 /* PushIOManager+PushIOTrackers.h in Headers */ = {isa = PBXBuildFile; fileRef = 13690B821A0283B40034BB52 /* PushIOManager+PushIOTrackers.h */; };
+		13690B8B1A0283B40034BB52 /* PushIOManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 13690B831A0283B40034BB52 /* PushIOManager.h */; };
+		13690B8C1A0283B40034BB52 /* PushIOManagerAll.h in Headers */ = {isa = PBXBuildFile; fileRef = 13690B841A0283B40034BB52 /* PushIOManagerAll.h */; };
+		13690B8D1A0283B40034BB52 /* PushIOTracker+PushIOCustomTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 13690B851A0283B40034BB52 /* PushIOTracker+PushIOCustomTracker.h */; };
 		24DD6CF91134B3F500162E58 /* UkCoTbpPushioModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* UkCoTbpPushioModule.h */; };
 		24DD6CFA1134B3F500162E58 /* UkCoTbpPushioModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* UkCoTbpPushioModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.m */; };
 		AA747D9F0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
-		BE03349F19B86F840032B7EB /* PushIOManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE03349E19B86F840032B7EB /* PushIOManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13690B7E1A0283B40034BB52 /* PIORegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIORegion.h; sourceTree = "<group>"; };
+		13690B7F1A0283B40034BB52 /* PushIOCustomTrackerPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushIOCustomTrackerPublisher.h; sourceTree = "<group>"; };
+		13690B801A0283B40034BB52 /* PushIOManager */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = PushIOManager; sourceTree = "<group>"; };
+		13690B811A0283B40034BB52 /* PushIOManager+PushIOLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushIOManager+PushIOLocation.h"; sourceTree = "<group>"; };
+		13690B821A0283B40034BB52 /* PushIOManager+PushIOTrackers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushIOManager+PushIOTrackers.h"; sourceTree = "<group>"; };
+		13690B831A0283B40034BB52 /* PushIOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushIOManager.h; sourceTree = "<group>"; };
+		13690B841A0283B40034BB52 /* PushIOManagerAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushIOManagerAll.h; sourceTree = "<group>"; };
+		13690B851A0283B40034BB52 /* PushIOTracker+PushIOCustomTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushIOTracker+PushIOCustomTracker.h"; sourceTree = "<group>"; };
 		24DD6CF71134B3F500162E58 /* UkCoTbpPushioModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UkCoTbpPushioModule.h; path = Classes/UkCoTbpPushioModule.h; sourceTree = "<group>"; };
 		24DD6CF81134B3F500162E58 /* UkCoTbpPushioModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UkCoTbpPushioModule.m; path = Classes/UkCoTbpPushioModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
@@ -49,8 +64,6 @@
 		24DE9E1011C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UkCoTbpPushioModuleAssets.m; path = Classes/UkCoTbpPushioModuleAssets.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkCoTbpPushio_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		BE03349E19B86F840032B7EB /* PushIOManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushIOManager.framework; sourceTree = "<group>"; };
-		BE0334A219B86FA10032B7EB /* pushio_config_debug.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pushio_config_debug.json; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libUkCoTbpPushio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUkCoTbpPushio.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE03349F19B86F840032B7EB /* PushIOManager.framework in Frameworks */,
+				13690B881A0283B40034BB52 /* PushIOManager in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +91,7 @@
 		0867D691FE84028FC02AAC07 /* push-io */ = {
 			isa = PBXGroup;
 			children = (
+				13690B7D1A0283B40034BB52 /* PushIOManager */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -89,7 +103,6 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE03349E19B86F840032B7EB /* PushIOManager.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -98,13 +111,27 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				BE0334A219B86FA10032B7EB /* pushio_config_debug.json */,
 				24DE9E0F11C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* UkCoTbpPushioModule.h */,
 				24DD6CF81134B3F500162E58 /* UkCoTbpPushioModule.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		13690B7D1A0283B40034BB52 /* PushIOManager */ = {
+			isa = PBXGroup;
+			children = (
+				13690B7E1A0283B40034BB52 /* PIORegion.h */,
+				13690B7F1A0283B40034BB52 /* PushIOCustomTrackerPublisher.h */,
+				13690B801A0283B40034BB52 /* PushIOManager */,
+				13690B811A0283B40034BB52 /* PushIOManager+PushIOLocation.h */,
+				13690B821A0283B40034BB52 /* PushIOManager+PushIOTrackers.h */,
+				13690B831A0283B40034BB52 /* PushIOManager.h */,
+				13690B841A0283B40034BB52 /* PushIOManagerAll.h */,
+				13690B851A0283B40034BB52 /* PushIOTracker+PushIOCustomTracker.h */,
+			);
+			path = PushIOManager;
 			sourceTree = "<group>";
 		};
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
@@ -123,9 +150,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13690B8C1A0283B40034BB52 /* PushIOManagerAll.h in Headers */,
+				13690B8B1A0283B40034BB52 /* PushIOManager.h in Headers */,
+				13690B871A0283B40034BB52 /* PushIOCustomTrackerPublisher.h in Headers */,
+				13690B8A1A0283B40034BB52 /* PushIOManager+PushIOTrackers.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* UkCoTbpPushio_Prefix.pch in Headers */,
+				13690B861A0283B40034BB52 /* PIORegion.h in Headers */,
 				24DD6CF91134B3F500162E58 /* UkCoTbpPushioModule.h in Headers */,
+				13690B8D1A0283B40034BB52 /* PushIOTracker+PushIOCustomTracker.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* UkCoTbpPushioModuleAssets.h in Headers */,
+				13690B891A0283B40034BB52 /* PushIOManager+PushIOLocation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +275,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/PushIOManager";
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DTI_POST_1_2",
@@ -286,7 +320,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/PushIOManager";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = (
 					"-ObjC",

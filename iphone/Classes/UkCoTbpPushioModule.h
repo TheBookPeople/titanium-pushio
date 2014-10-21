@@ -19,7 +19,7 @@
  * along with Titatanium PushIO Module.  If not, see <http://www.gnu.org/licenses/>.
  */
 #import "TiModule.h"
-#import <PushIOManager/PushIOManager.h>
+#import "PushIOManager.h"
 
 @interface UkCoTbpPushioModule : TiModule <PushIOManagerDelegate>{
 @private

@@ -1,7 +1,7 @@
-# PushIO Module
+# PushIO Module [![Build Status](https://travis-ci.org/TheBookPeople/titanium-pushio.svg?branch=master)](https://travis-ci.org/TheBookPeople/titanium-pushio)
 
-This is a Titanium Mobile Mobile module project that adds PushIO
-(http://www.responsys.com/marketing-cloud/products/push-IO) notifications to a project. 
+This is a Titanium Mobile Mobile module project that adds PushIO notifications to a project. 
+(http://www.responsys.com/marketing-cloud/products/push-IO)
 
 This module currently only supports iOS. You will need a PushIO account to use this module.
 
@@ -56,13 +56,8 @@ PushIO have created a iOS framework for their service. it can be downloaded from
 
 https://github.com/pushio/PushIOManager_iOS
 
-module.xcconfig needs to be updated to point the absolute path of the folder containing PushIOManager.framework. The current supported
-version of the framework has been included for convenience.
+The supported version of the framework has been includede with this module
 
-e.g.
-```
-OTHER_LDFLAGS=$(inherited) -F"/Users/[username]/Development/projects/titanium-pushio/iphone"  -framework PushIOManager
-```
 
 ### Build
 
@@ -109,6 +104,14 @@ function deviceTokenError(e) {
   alert('Failed to register for push notifications! ' + e.error);
 }
 ```  
+
+## PushIO
+
+A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io This call will always return a non-null value.
+
+```javascript
+Ti.API.Info(push_io.pushIOUUID); 
+``` 
 
 ## Categories
 
