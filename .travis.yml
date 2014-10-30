@@ -3,7 +3,7 @@ before_install:
     - MODULE_ROOT=$PWD
 install: 
     - mkdir -p $HOME/Library/Application\ Support/Titanium/
-    - wget http://builds.appcelerator.com/mobile/3.4.0/mobilesdk-3.4.0.GA-osx.zip -O /Library/Application\ Support/Titanium/mobilesdk-3.4.0.GA-osx.zip
+    - wget http://builds.appcelerator.com/mobile/3.4.0/mobilesdk-3.4.0.GA-osx.zip -O $HOME/Library/Application\ Support/Titanium/mobilesdk-3.4.0.GA-osx.zip
     - cd $HOME/Library/Application\ Support/Titanium/
     - unzip -o mobilesdk-3.4.0.GA-osx.zip
 before_script:
