@@ -104,6 +104,15 @@
 	[[PushIOManager sharedInstance] didReceiveRemoteNotification:userInfo];
 }
 
+-(void)overridePushIOAPIKey:(id)apiKey
+{
+    ENSURE_ARG_COUNT(apiKey, 1);
+    ENSURE_TYPE([apiKey objectAtIndex:0], NSString);
+    
+    [[PushIOManager sharedInstance] overridePushIOAPIKey:[apiKey objectAtIndex:0]];
+}
+
+
 
 #pragma mark Cleanup
 
