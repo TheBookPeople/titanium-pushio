@@ -2,10 +2,10 @@ language: objective-c
 before_install:
     - MODULE_ROOT=$PWD
 install: 
-    - mkdir -p /Library/Application\ Support/Titanium/osx
-    - wget http://builds.appcelerator.com/mobile/3.4.0/mobilesdk-3.4.0.GA-osx.zip -O /Library/Application\ Support/Titanium/osx/mobilesdk-3.4.0.GA-osx.zip
+    - mkdir -p /Library/Application\ Support/Titanium/
+    - wget http://builds.appcelerator.com/mobile/3.4.0/mobilesdk-3.4.0.GA-osx.zip -O /Library/Application\ Support/Titanium/mobilesdk-3.4.0.GA-osx.zip
     - cd /Library/Application\ Support/Titanium/
-    - unzip -o  mobilesdk-3.4.0.GA-osx.zip
+    - unzip -o mobilesdk-3.4.0.GA-osx.zip
 before_script:
     - cd $MODULE_ROOT
 script: 
