@@ -26,6 +26,3 @@
 // IMPORTANT NOTE: always use $(inherited) in your overrides
 //
 
-// [PUSH_IO_DIR] needs to be replaced with the folder that contains PushIOManager.framework
-OTHER_LDFLAGS=$(inherited) -F"/Users/wgriffiths/Development/projects/titanium-pushio/iphone"  -framework PushIOManager
-
