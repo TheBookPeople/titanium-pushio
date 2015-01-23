@@ -1,0 +1,17 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.2.1
+apiversion: 2
+description: push-io
+author: The Book People Ltd
+license: GPLv3
+copyright: Copyright (c) 2014 by The Book People Ltd
+
+# these should not be edited
+name: push-io
+moduleid: uk.co.tbp.pushio
+guid: 0f2d1da9-5666-436a-a2ae-de5ba5103200
+platform: iphone
+minsdk: 3.4.0.GA
