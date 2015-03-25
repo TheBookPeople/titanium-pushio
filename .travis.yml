@@ -12,8 +12,8 @@ script:
     - curl -o build.sh https://raw.githubusercontent.com/TheBookPeople/ci-scripts/master/travis/titanium/modules/build.sh
     - source build.sh
 before_deploy:
-  - export ANDROID_DIST=$(find .  -name 'uk.co.tbp.pushio-android-*.zip)
-  - export IOS_DIST=$(find .  -name 'uk.co.tbp.pushio-ios-*.zip)
+  - export ANDROID_DIST=$(find .  -name 'uk.co.tbp.pushio-android-*.zip')
+  - export IOS_DIST=$(find .  -name 'uk.co.tbp.pushio-ios-*.zip')
   - echo "deploying Android $ANDROID_DIST to GitHub releases"
   - echo "deploying iOS $IOS_DIST to GitHub releases"
 deploy:
@@ -27,3 +27,4 @@ deploy:
     - "${IOS_DIST}"
   on:
     all_branches: true
+	tags: true
