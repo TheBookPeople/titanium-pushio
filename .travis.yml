@@ -27,4 +27,4 @@ deploy:
     - "${IOS_DIST}"
   on:
     all_branches: true
-	tags: true
+    tags: true
