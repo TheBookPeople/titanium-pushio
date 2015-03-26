@@ -7,7 +7,7 @@ before_install:
 install:
     - cd $MODULE_ROOT
     - curl -o settup.sh https://raw.githubusercontent.com/TheBookPeople/ci-scripts/master/travis/titanium/modules/settup.sh
-    - source settup.sh -s "3.4.1.GA"
+    - source settup.sh -s "3.5.1.GA"
 script: 
     - curl -o build.sh https://raw.githubusercontent.com/TheBookPeople/ci-scripts/master/travis/titanium/modules/build.sh
     - source build.sh
