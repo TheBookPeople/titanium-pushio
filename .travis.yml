@@ -21,7 +21,6 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: NhzPsm6tkcZNc7RPMwASH1D5xlbHfRaC4ssBBsC1MG5NOML9rE7wFPtag9Q6wQzCEZcAsCFIT3cktdQYOVGE7wgb7TUox7nhu+1C2+tymVozNFuhaiZ4mW4LpYTT82FgCXq81/bHiHpxj82T0f2V3XwNQ0tdEw5EwA7SlqEuKd4=
-  file_glob: true
   file:
     - "${ANDROID_DIST}"
     - "${IOS_DIST}"
