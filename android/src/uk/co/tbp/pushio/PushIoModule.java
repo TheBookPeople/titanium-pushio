@@ -52,6 +52,20 @@ public class PushIoModule extends KrollModule {
 		return uaModule;
 	}
 
+	
+	@Kroll.method
+	public void setDefaultLargeIcon(int resourceId) {
+		Log.d(LCAT, "setDefaultLargeIcon");
+	    getPushIOManager().setDefaultLargeIcon(resourceId);
+	}
+	
+	@Kroll.method
+	public void setDefaultSmallIcon(int resourceId) {
+		Log.d(LCAT, "setDefaultSmallIcon");
+		getPushIOManager().setDefaultSmallIcon(resourceId);
+	}
+	
+	
 	@Kroll.method
 	public void registerDevice() {
 		Log.d(LCAT, "registerDevice - NOP - just included for compatibility with iOS");
